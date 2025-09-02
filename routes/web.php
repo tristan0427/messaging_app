@@ -4,6 +4,7 @@ use App\Http\Controllers\Frontend_Controller;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\FriendController;
+use App\Http\Controllers\ChatController;
 
 //Route::get('/', function () {
 //    return Inertia::render('Welcome');
@@ -19,7 +20,11 @@ Route::get('dashboard', function () {
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/friends/list', [FriendController::class, 'list'])->name('friends.list');
 });
-
+//chats controller
+Route::middleware('auth')->group(function () {
+    Route::get('/chat/{friendId}', [ChatController::class, 'getOrCreateChat']);
+    Route::post('/chat/{chatId}/send', [ChatController::class, 'sendMessage']);
+});
 
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';

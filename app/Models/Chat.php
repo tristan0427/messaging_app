@@ -12,9 +12,10 @@ class Chat extends Model
         'is_group' => 'boolean',
     ];
 
-    public function participants()
+    public function users()
     {
-        return $this->belongsToMany(User::class, 'chat_participants');
+        return $this->belongsToMany(User::class, 'chat_participants')
+            ->withPivot('joined_at');
     }
 
     public function messages()
