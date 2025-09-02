@@ -87,7 +87,7 @@ const togglePasswordVisibility = () => {
                                 :tabindex="1"
                                 autocomplete="email"
                                 placeholder="Enter your email"
-                                class="h-12 bg-white/10 backdrop-blur-sm border-white/30 text-black placeholder:text-purple-300 focus:border-white/50 focus:ring-2 focus:ring-white/25 rounded-xl"
+                                class="h-12 bg-white/10 backdrop-blur-sm border-white/30 text-black  focus:border-white/50 focus:ring-2 focus:ring-white/25 rounded-xl"
                             />
                             <InputError :message="errors.email" class="text-red-300" />
                         </div>
@@ -113,13 +113,13 @@ const togglePasswordVisibility = () => {
                                 :tabindex="2"
                                 autocomplete="current-password"
                                 placeholder="Enter your password"
-                                class="h-12 bg-white/10 backdrop-blur-sm border-white/30 text-black placeholder:text-purple-300 focus:border-white/50 focus:ring-2 focus:ring-white/25 rounded-xl"
+                                class="h-12 bg-white/10 backdrop-blur-sm border-white/30 text-black focus:border-white/50 focus:ring-2 focus:ring-white/25 rounded-xl"
                             />
 
                             <button
                                 type="button"
                                 @click="togglePasswordVisibility"
-                                class="absolute right-12 top-69 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                                class="absolute right-12 top-69 transform -translate-y-1/2 text-purple-500 hover:text-purple-300"
                                 :tabindex="-1"
                             >
                                 <Eye v-if="!showPassword" class="h-5 w-5" />

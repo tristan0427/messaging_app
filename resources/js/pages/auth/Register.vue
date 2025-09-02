@@ -82,7 +82,7 @@ const togglePasswordConfirmationVisibility = () => {
                                 :tabindex="1"
                                 autocomplete="name"
                                 placeholder="Enter your full name"
-                                class="h-12 bg-white/10 backdrop-blur-sm border-white/30 text-white  focus:border-white/50 focus:ring-2 focus:ring-white/25 rounded-xl"
+                                class="h-12 bg-white/10 backdrop-blur-sm border-white/30 text-black  focus:border-white/50 focus:ring-2 focus:ring-white/25 rounded-xl"
                             />
                             <InputError :message="errors.name" class="text-red-300" />
                         </div>
@@ -98,7 +98,7 @@ const togglePasswordConfirmationVisibility = () => {
                                 :tabindex="2"
                                 autocomplete="email"
                                 placeholder="Enter your email"
-                                class="h-12 bg-white/10 backdrop-blur-sm border-white/30 text-white  focus:border-white/50 focus:ring-2 focus:ring-white/25 rounded-xl"
+                                class="h-12 bg-white/10 backdrop-blur-sm border-white/30 text-black  focus:border-white/50 focus:ring-2 focus:ring-white/25 rounded-xl"
                             />
                             <InputError :message="errors.email" class="text-red-300" />
                         </div>
@@ -120,7 +120,7 @@ const togglePasswordConfirmationVisibility = () => {
                                 <button
                                     type="button"
                                     @click="togglePasswordVisibility"
-                                    class="absolute right-3 top-1/2 transform -translate-y-1/2 text-purple-300 hover:text-white transition-colors"
+                                    class="absolute right-3 top-1/2 transform -translate-y-1/2 text-purple-500 hover:text-purple-300 transition-colors"
                                     :tabindex="-1"
                                 >
                                     <Eye v-if="!showPassword" class="h-5 w-5" />
@@ -147,7 +147,7 @@ const togglePasswordConfirmationVisibility = () => {
                                 <button
                                     type="button"
                                     @click="togglePasswordConfirmationVisibility"
-                                    class="absolute right-3 top-1/2 transform -translate-y-1/2 text-purple-300 hover:text-white transition-colors"
+                                    class="absolute right-3 top-1/2 transform -translate-y-1/2 text-purple-500 hover:text-purple-300 transition-colors"
                                     :tabindex="-1"
                                 >
                                     <Eye v-if="!showPasswordConfirmation" class="h-5 w-5" />
