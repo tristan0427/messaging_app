@@ -115,7 +115,7 @@ const togglePasswordConfirmationVisibility = () => {
                                     :tabindex="3"
                                     autocomplete="new-password"
                                     placeholder="Create a strong password"
-                                    class="h-12 bg-white/10 backdrop-blur-sm border-white/30 text-white  focus:border-white/50 focus:ring-2 focus:ring-white/25 rounded-xl pr-12"
+                                    class="h-12 bg-white/10 backdrop-blur-sm border-white/30 text-black  focus:border-white/50 focus:ring-2 focus:ring-white/25 rounded-xl pr-12"
                                 />
                                 <button
                                     type="button"
@@ -142,7 +142,7 @@ const togglePasswordConfirmationVisibility = () => {
                                     :tabindex="4"
                                     autocomplete="new-password"
                                     placeholder="Confirm your password"
-                                    class="h-12 bg-white/10 backdrop-blur-sm border-white/30 text-white  focus:border-white/50 focus:ring-2 focus:ring-white/25 rounded-xl pr-12"
+                                    class="h-12 bg-white/10 backdrop-blur-sm border-white/30 text-black  focus:border-white/50 focus:ring-2 focus:ring-white/25 rounded-xl pr-12"
                                 />
                                 <button
                                     type="button"
