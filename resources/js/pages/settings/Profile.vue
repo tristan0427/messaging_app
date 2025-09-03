@@ -13,6 +13,18 @@ import { Label } from '@/components/ui/label';
 import AppLayout from '@/layouts/AppLayout.vue';
 import SettingsLayout from '@/layouts/settings/Layout.vue';
 import { type BreadcrumbItem } from '@/types';
+import { ref } from 'vue';
+
+const previewImage = ref<string | null>(null);
+
+function handleFileChange(event: Event) {
+    const file = (event.target as HTMLInputElement).files?.[0];
+    if (file) {
+        previewImage.value = URL.createObjectURL(file);
+    } else {
+        previewImage.value = null;
+    }
+}
 
 interface Props {
     mustVerifyEmail: boolean;
@@ -41,6 +53,35 @@ const user = page.props.auth.user;
                 <HeadingSmall title="Profile information" description="Update your name and email address" />
 
                 <Form v-bind="ProfileController.update.form()" class="space-y-6" v-slot="{ errors, processing, recentlySuccessful }">
+                    <div class="grid gap-2">
+
+                        <Label for="avatar">Profile Picture</Label>
+                        <!-- Preview -->
+                        <div class="mt-3">
+                            <img
+                                v-if="previewImage"
+                                :src="previewImage"
+                                alt="Preview"
+                                class="w-16 h-16 rounded-full object-cover border"
+                            />
+                            <img
+                                v-else-if="user.avatar"
+                                :src="user.avatar"
+                                alt="Profile Picture"
+                                class="w-16 h-16 rounded-full object-cover border"
+                            />
+                        </div>
+                        <Input
+                            id="avatar"
+                            type="file"
+                            name="avatar"
+                            accept="image/*"
+                            @change="handleFileChange"
+                        />
+                        <InputError class="mt-2" :message="errors.avatar" />
+
+
+                    </div>
                     <div class="grid gap-2">
                         <Label for="name">Name</Label>
                         <Input

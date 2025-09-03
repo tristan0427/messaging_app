@@ -53,7 +53,8 @@ const fetchFriends = () => {
                 last_seen: friend.last_seen,
                 last_message: friend.last_message,
                 last_message_time: friend.last_message_time,
-                href: friend.href || `/chat/${friend.id}`
+                href: friend.href || `/chat/${friend.id}`,
+                avatarError: false // Track avatar loading errors
             }));
 
             console.log("Mapped friends:", friends.value);
@@ -98,6 +99,12 @@ const selectGroupChat = () => {
     console.log('Selected group chat:', group.value);
 };
 
+// Handle image loading errors
+const handleImageError = (friend: any) => {
+    console.error('Failed to load avatar for:', friend.name, 'URL:', friend.avatar);
+    friend.avatarError = true;
+};
+
 onMounted(() => {
     fetchFriends();
     fetchGroup();
@@ -129,6 +136,11 @@ function formatTime(timestamp: string) {
 function truncateMessage(message: string, length: number = 25) {
     if (!message) return '';
     return message.length > length ? message.substring(0, length) + '...' : message;
+}
+
+// Check if avatar URL is valid
+function hasValidAvatar(friend: any) {
+    return friend.avatar && !friend.avatarError && friend.avatar.trim() !== '';
 }
 </script>
 
@@ -173,7 +185,7 @@ function truncateMessage(message: string, length: number = 25) {
                     <div class="flex-1 min-w-0">
                         <div class="flex items-center justify-between mb-1">
                             <span class="text-sm font-medium text-green-600 dark:text-green-400">
-                                🌍 {{ group.name }}
+                                 {{ group.name }}
                             </span>
                             <span v-if="group.last_message_time" class="text-xs text-gray-500">
                                 {{ formatTime(group.last_message_time) }}
@@ -181,9 +193,6 @@ function truncateMessage(message: string, length: number = 25) {
                         </div>
                         <p class="text-xs text-gray-500 dark:text-gray-400 truncate">
                             {{ group.description }}
-                        </p>
-                        <p v-if="group.last_message && group.last_message !== 'No messages yet'" class="text-xs text-gray-600 dark:text-gray-400 truncate mt-1">
-                            {{ truncateMessage(group.last_message) }}
                         </p>
                     </div>
                 </div>
@@ -210,12 +219,19 @@ function truncateMessage(message: string, length: number = 25) {
                         >
                             <!-- Avatar -->
                             <div class="relative">
+                                <!-- Image Avatar -->
                                 <div
-                                    v-if="friend.avatar"
+                                    v-if="hasValidAvatar(friend)"
                                     class="h-10 w-10 rounded-full overflow-hidden"
                                 >
-                                    <img :src="friend.avatar" :alt="friend.name" class="h-full w-full object-cover" />
+                                    <img
+                                        :src="friend.avatar"
+                                        :alt="friend.name"
+                                        class="h-full w-full object-cover"
+                                        @error="handleImageError(friend)"
+                                    />
                                 </div>
+                                <!-- Fallback Avatar -->
                                 <div
                                     v-else
                                     class="h-10 w-10 rounded-full bg-gray-300 dark:bg-gray-600 flex items-center justify-center text-sm font-bold text-white"

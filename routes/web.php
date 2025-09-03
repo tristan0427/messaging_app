@@ -31,7 +31,16 @@ Route::get('/groups/list', [GroupController::class, 'index']);
 Route::get('/group-chat/messages', [GroupController::class, 'getMessages']);
 Route::post('/group-chat/send', [GroupController::class, 'sendMessage']);
 
+// Add this to your routes/web.php
+Route::get('/storage/Profile_Picture/{filename}', function ($filename) {
+    $path = storage_path('app/public/Profile_Picture/' . $filename);
 
+    if (!file_exists($path)) {
+        abort(404);
+    }
+
+    return response()->file($path);
+})->where('filename', '.*');
 
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';

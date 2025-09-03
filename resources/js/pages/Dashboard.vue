@@ -34,7 +34,7 @@ async function handleChatSelected(chat: any, type: 'friend' | 'group') {
         } else if (type === 'group') {
             // Handle group chat
             const res = await axios.get('/group-chat/messages');
-            chatId.value = 1; // Fixed group ID since you have one global group
+            chatId.value = 1;
             messages.value = res.data.messages || [];
         }
 
@@ -66,7 +66,7 @@ async function sendMessage() {
                 message: newMessage.value,
             });
         } else {
-            return; // No valid chat selected
+            return;
         }
 
         // Push the new message
@@ -235,12 +235,12 @@ onUnmounted(() => {
                             <span
                                 v-if="chatType === 'group'"
                                 class="inline-flex items-center px-2 py-1 rounded-full text-xs bg-green-100 text-green-800 dark:bg-green-800 dark:text-green-100">
-                                🌍 Group Chat
+                                 Group Chat
                             </span>
                             <span
                                 v-else
                                 class="inline-flex items-center px-2 py-1 rounded-full text-xs bg-blue-100 text-blue-800 dark:bg-blue-800 dark:text-blue-100">
-                                💬 Direct Message
+                                 Direct Message
                             </span>
                         </div>
                     </div>
@@ -261,14 +261,14 @@ onUnmounted(() => {
                         <!-- Empty state for messages -->
                         <div v-if="messages.length === 0" class="text-center text-gray-500 py-8">
                             <div class="text-4xl mb-2">
-                                {{ chatType === 'group' ? '🌍' : '💬' }}
+                                {{ chatType === 'group' ? '' : '' }}
                             </div>
                             <p class="text-sm">
                                 {{ chatType === 'group' ? 'No messages in this group yet' : 'No messages yet' }}
                             </p>
-                            <p class="text-xs mt-1">
-                                {{ chatType === 'group' ? 'Be the first to say something!' : 'Start the conversation!' }}
-                            </p>
+<!--                            <p class="text-xs mt-1">-->
+<!--                                {{ chatType === 'group' ? 'Be the first to say something!' : 'Start the conversation!' }}-->
+<!--                            </p>-->
                         </div>
                     </div>
 
@@ -292,9 +292,9 @@ onUnmounted(() => {
                 <!-- If no chatmate yet -->
                 <div v-else class="flex-1 flex items-center justify-center text-gray-500">
                     <div class="text-center">
-                        <div class="text-6xl mb-4">💬</div>
+                        <div class="text-6xl mb-4"></div>
                         <p class="text-lg font-medium mb-2">Welcome to Chat</p>
-                        <p>Select a friend or the group chat from the sidebar to start messaging</p>
+                        <p>ako-a ning code</p>
                     </div>
                 </div>
             </div>
